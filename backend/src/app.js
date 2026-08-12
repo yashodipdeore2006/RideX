@@ -1,15 +1,18 @@
 import express from 'express';
 import cors from 'cors';
 import cookieParse from 'cookie-parser';
+import dotenv from 'dotenv';
 
 //=== Local modules ===
-import userRoutes from './routes/user.routes';
-
+import userRoutes from './routes/user.routes.js';
+import { connectDB } from './config/db.config.js';
 
 
 //======== APP =========
 const app = express();
+dotenv.config();
 
+connectDB();
 
 //================ Middleware ==================
 app.use(express.json());
