@@ -1,4 +1,4 @@
-import { validateResult } from 'express-validator';
+import { validationResult } from 'express-validator';
 
 
 import userModel from '../models/user.model.js';
@@ -10,8 +10,8 @@ import { hash } from 'bcrypt';
 export async function registerUser(req, res) {
   try {
     //Check if their is error in req validator
-    const error = validateResult(req);
-    if (!error.isEmpty()) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
       return res.status(400).json({
         errors: errors.array()
       });
