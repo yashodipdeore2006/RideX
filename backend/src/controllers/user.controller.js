@@ -40,8 +40,8 @@ export async function registerUser(req, res) {
         firstname: fullname.firstname,
         lastname: fullname.lastname
       },
-      email,
-      password
+      email: email,
+      password: hashedPassword
     });
 
 
@@ -50,6 +50,7 @@ export async function registerUser(req, res) {
 
 
     res.status(200).json({
+      message: 'User registered successfully',
       user,
       token
     });
@@ -67,7 +68,6 @@ export async function registerUser(req, res) {
 
 export async function loginUser(req, res) {
   try {
-
     //Check there is any error in "loginUser" validator
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -95,7 +95,7 @@ export async function loginUser(req, res) {
 
     //Error is password wrong 
     if (!isMatched) {
-      return res.status(
+      return res.status(400).json(
         {
           error: 'Invalid credentials'
         }
@@ -111,6 +111,7 @@ export async function loginUser(req, res) {
 
     res.status(200).json(
       {
+        message: 'Login successful',
         user,
         token
       }
