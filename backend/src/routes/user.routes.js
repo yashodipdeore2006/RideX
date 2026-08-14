@@ -16,11 +16,11 @@ const userRoutes = express.Router();
 
 userRoutes.post('/register', registerValidator, registerUser);
 
-userRoutes.post('/login');
+// userRoutes.post('/login');
 
-userRoutes.get('/profile');
+// userRoutes.get('/profile');
 
-userRoutes.get('/logout');
+// userRoutes.get('/logout');
 
 
 

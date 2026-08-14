@@ -3,7 +3,7 @@ import userModel from "../models/user.model.js";
 
 
 export async function createUser(firstname, lastname, email, password) {
-  if (!firstname || !lastname || email || password) {
+  if (!firstname || !lastname || !email || !password) {
     throw new Error('All field are required');
   };
 
@@ -12,8 +12,8 @@ export async function createUser(firstname, lastname, email, password) {
     fullname: {
       firstname,
       lastname,
-      email,
-      password
-    }
+    },
+    email,
+    password
   });
 };

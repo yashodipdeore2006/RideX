@@ -1,9 +1,9 @@
 import { validationResult } from 'express-validator';
-
-
-import userModel from '../models/user.model.js';
 import { hash } from 'bcrypt';
 
+//=== Local Modules ====
+import userModel from '../models/user.model.js';
+import { createUser } from '../services/user.services.js';
 
 //================== Controllers =====================
 
@@ -31,22 +31,25 @@ export async function registerUser(req, res) {
     };
 
     //Hashing the password
-    const hashedPassword = await userModel.hashedPassword(password);
+    const hashedPassword = await hash(password, 10);
+
 
     //Creating new user using create user service
-    const user = await createUser({
-      firstname: fullname.firstname,
-      lastname: fullname.lastname,
-      email: email,
-      password: hashedPassword
+    const user = await userModel.create({
+      fullname: {
+        firstname: fullname.firstname,
+        lastname: fullname.lastname
+      },
+      email,
+      password
     });
 
 
     //Generating user's token
-    const token = userModel.generateAuthToken();
+    const token = user.generateAuthToken();
 
 
-    re.status(200).json({
+    res.status(200).json({
       user,
       token
     });
