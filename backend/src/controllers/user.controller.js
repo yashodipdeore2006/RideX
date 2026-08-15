@@ -35,14 +35,8 @@ export async function registerUser(req, res) {
 
 
     //Creating new user using create user service
-    const user = await userModel.create({
-      fullname: {
-        firstname: fullname.firstname,
-        lastname: fullname.lastname
-      },
-      email: email,
-      password: hashedPassword
-    });
+    const user = await createUser(fullname.firstname, fullname.lastname, email, hashedPassword
+    );
 
 
     //Generating user's token
