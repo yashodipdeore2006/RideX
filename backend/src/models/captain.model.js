@@ -51,7 +51,7 @@ const captainSchema = new mongoose.Schema({
     capacity: {
       type: Number,
       required: true,
-      minLength: [1, 'capacity should be atleast 1']
+      min: [1, 'capacity should be atleast 1']
     },
     vehicleType: {
       type: String,
@@ -91,11 +91,11 @@ captainSchema.methods.comparePassword = async function (enteredPassword) {
 };
 
 
-captainSchema.methods.hashPassword = async function (password) {
+captainSchema.statics.hashPassword = async function (password) {
   return await bcrypt.hash(password, 10);
 }
 
 
-const captainModel = mongoose.model('captainModel', captainModel);
+const captainModel = mongoose.model('captainModel', captainSchema);
 
 export default captainModel;

@@ -2,16 +2,26 @@ import captainModel from "../models/captain.model.js";
 
 
 
-export async function createCaptain(firstname, lastname, email, password, socketId, status, color, plate, capacity, vehicleType, ltd, lng) {
-  if (!firstname || !lastname || !email || !password || !socketId || !status || !color || !plate || !capacity || !vehicleType || !ltd || !lng
+export async function createCaptain(firstname, lastname, email, password, socketId, color, plate, capacity, vehicleType, ltd, lng) {
+  if (
+    !firstname ||
+    !email ||
+    !password ||
+    !socketId ||
+    !color ||
+    !plate ||
+    !capacity ||
+    !vehicleType ||
+    ltd === undefined ||
+    lng === undefined
   ) {
-    throw new Error('All fields are required');
-  };
+    throw new Error("All fields are required");
+  }
 
   const captain = await captainModel.create({
     fullname: {
       firstname: firstname,
-      lastname: lastname
+      lastname: lastname ?? null
     },
     email: email,
     password: password,
