@@ -145,3 +145,17 @@ export async function profileUser(req, res) {
     );
   };
 };
+
+export async function logoutUser(req, res) {
+  try {
+    res.clearCookie('token');
+    res.status(200).json({
+      message: 'Logged out successfully'
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      error: 'Something went wrong'
+    });
+  };
+};
