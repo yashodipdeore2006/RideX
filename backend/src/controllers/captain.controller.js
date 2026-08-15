@@ -111,3 +111,19 @@ export async function logoutCaptain(req, res) {
 }
 
 
+
+export async function profilerCaptain(req, res) {
+  try {
+    const captain = req.captain;
+
+    res.status(200).json({
+      message: 'Profile found successfully',
+      captain
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: 'Something went wrong'
+    });
+  };
+};
