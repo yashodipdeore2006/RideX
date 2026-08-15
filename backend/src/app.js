@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 
 //=== Local modules ===
 import userRoutes from './routes/user.routes.js';
+import captainRoutes from './routes/captain.routes.js';
 import { connectDB } from './config/db.config.js';
 
 
@@ -33,7 +34,7 @@ app.get('/', (req, res) => {
 app.use('/api/v1/users', userRoutes);
 
 
-app.use('/api/v1/captain', userRoutes);
+app.use('/api/v1/captain', captainRoutes);
 
 
 //============================================
