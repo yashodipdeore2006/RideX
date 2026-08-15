@@ -55,3 +55,9 @@ export const captainRegisterValidator = [
     .isIn(["bike", "scooter", "auto", "car"])
     .withMessage("Invalid vehicle type")
 ];
+
+
+export const captainLoginValidator = [
+  body('email').isEmail().withMessage('Invalid email'),
+  body('password').isLength({ min: 6 }).withMessage('Password should be at least 6 characters long'),
+]; 
