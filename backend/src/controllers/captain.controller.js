@@ -77,7 +77,7 @@ export async function loginCaptain(req, res) {
     };
 
 
-    const token = captain.generateAuthToken();
+    const token = await captain.generateAuthToken();
 
 
     res.cookie('token', token);
@@ -94,3 +94,20 @@ export async function loginCaptain(req, res) {
     });
   };
 };
+
+
+export async function logoutCaptain(req, res) {
+  try {
+    res.clearCookie('token');
+    res.status(200).json({
+      message: 'Logout successful'
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      error: 'Something went wrong'
+    });
+  };
+}
+
+
