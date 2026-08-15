@@ -16,7 +16,7 @@ export async function createCaptain(firstname, lastname, email, password, socket
     email: email,
     password: password,
     socketId: socketId,
-    status: status,
+    status: 'active',
     vehicles: {
       color: color,
       plate: plate,
