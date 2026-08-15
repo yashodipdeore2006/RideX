@@ -16,4 +16,6 @@ export async function createUser(firstname, lastname, email, password) {
     email,
     password
   });
+
+  return user;
 };
