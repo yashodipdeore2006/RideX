@@ -13,6 +13,7 @@
   "dependencies": {
     "axios": "^1.19.0",
     "bcrypt": "^6.0.0",
+    "cookie": "^1.1.1",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
@@ -20,6 +21,7 @@
     "express-validator": "^7.3.2",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.9.2",
-    "nodemon": "^3.1.14"
+    "nodemon": "^3.1.14",
+    "parser": "^0.1.4"
   }
 }
