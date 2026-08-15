@@ -91,8 +91,9 @@ captainSchema.methods.comparePassword = async function (enteredPassword) {
 };
 
 
-
-
+captainSchema.methods.hashPassword = async function (password) {
+  return await bcrypt.hash(password, 10);
+}
 
 
 const captainModel = mongoose.model('captainModel', captainModel);
