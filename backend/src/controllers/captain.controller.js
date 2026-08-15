@@ -45,3 +45,52 @@ export async function registerCaptain(req, res) {
     });
   };
 };
+
+
+export async function loginCaptain(req, res) {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        errors: errors.array()
+      });
+    };
+
+    const { email, password } = req.body;
+
+    const captain = await captainModel.findOne({ email: email }).select('+password');
+
+    if (!captain) {
+      return res.status(404).json(
+        {
+          error: 'Captain/user not found'
+        }
+      );
+    };
+
+    const isMatched = await captain.comparePassword(password);
+
+    if (!isMatched) {
+      return res.status({
+        error: 'Invalid credentials'
+      });
+    };
+
+
+    const token = captain.generateAuthToken();
+
+
+    res.cookie('token', token);
+
+    res.status(200).json({
+      message: `Hii, 🚕${captain.fullname.firstname}`,
+      captain,
+      token
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      error: 'Something went wrong'
+    });
+  };
+};
