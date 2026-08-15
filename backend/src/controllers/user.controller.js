@@ -124,3 +124,24 @@ export async function loginUser(req, res) {
     });
   };
 };
+
+
+
+export async function profileUser(req, res) {
+  try {
+    const user = req.user;
+
+    res.status(200).json({
+      message: `Hii,🎯${user.fullname.firstname}`,
+      user: user
+    });
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(
+      {
+        error: 'Something went wrong'
+      }
+    );
+  };
+};
