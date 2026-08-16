@@ -15,7 +15,7 @@ export async function registerCaptain(req, res) {
       });
     };
 
-    const { fullname, email, password, socketId, vehicles, location } = req.body;
+    const { fullname, email, password, vehicles } = req.body;
 
     const isCaptainAlreadyExists = await captainModel.findOne({ email: email });
 
@@ -28,7 +28,7 @@ export async function registerCaptain(req, res) {
 
     const hashedPassword = await captainModel.hashPassword(password);
 
-    const captain = await createCaptain(fullname.firstname, fullname.lastname, email, hashedPassword, socketId, vehicles.color, vehicles.plate, vehicles.capacity, vehicles.vehicleType, location.ltd, location.lng)
+    const captain = await createCaptain(fullname.firstname, fullname.lastname, email, hashedPassword, vehicles.color, vehicles.plate, vehicles.capacity, vehicles.vehicleType)
 
     const token = captain.generateAuthToken();
 
@@ -111,7 +111,6 @@ export async function logoutCaptain(req, res) {
 }
 
 
-
 export async function profilerCaptain(req, res) {
   try {
     const captain = req.captain;
@@ -127,3 +126,4 @@ export async function profilerCaptain(req, res) {
     });
   };
 };
+
